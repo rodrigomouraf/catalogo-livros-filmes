@@ -53,7 +53,7 @@ catalogo-livros-filmes/
 ├── src/
 │   ├── main/
 │   │   ├── java/br/com/catalogo_livros_filmes/
-│   │   │   ├── api/controllers/       # Servlets (controllers)
+│   │   │   ├── controllers/       # Servlets (controllers)
 │   │   │   ├── shared/database/       # ConnectionFactory & DatabaseMigrator
 │   │   │   ├── shared/models/         # POJOs (CatalogModel)
 │   │   │   ├── shared/repositories/   # JDBC Repositories
@@ -62,7 +62,10 @@ catalogo-livros-filmes/
 │   │       ├── db/migrations/         # SQL migrations
 │   │       └── db/seeds/              # SQL seed data
 │   └── webapp/
+│       └── index.jsp
 │       └── WEB-INF/views/items/       # JSP views
+│           └── detail.jsp
+│           └── form.jsp
 │           └── list.jsp
 ├── pom.xml
 ├── Dockerfile
