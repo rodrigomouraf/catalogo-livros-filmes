@@ -12,15 +12,24 @@
   <img src="https://img.shields.io/badge/Maven-Build%20Tool-yellow?style=for-the-badge&logo=apachemaven">
 </p>
 
+<h1 align="center">📚 Catálogo de Livros, Séries e Filmes</h1>
+
+<p align="center">
+  <b>Aplicação web simples em Java (Servlets + JSP + JDBC)</b><br>
+  <i>Parte de um projeto acadêmico, com foco em arquitetura Java EE moderna</i>
+</p>
+
+---
+
 ## 🎯 Learning Objectives
 
 This project demonstrates:
 
-- Object-Oriented Programming (OOP) in Java
-- Web development using **Jakarta Servlets** and **JSP**
-- Database access using **JDBC + PreparedStatement**
-- Secure SQL handling and modular architecture
-- Docker-based setup for MySQL and Tomcat
+- Object-Oriented Programming (OOP) in Java  
+- Web development using Jakarta Servlets and JSP  
+- Database access using JDBC + PreparedStatement  
+- Secure SQL handling and modular architecture  
+- Docker-based setup for MySQL and Tomcat  
 
 ---
 
@@ -39,50 +48,54 @@ This project demonstrates:
 
 ## ⚙️ Project Structure
 
+```bash
 catalogo-livros-filmes/
 ├── src/
-│ ├── main/
-│ │ ├── java/br/com/catalogo_livros_filmes/
-│ │ │ ├── api/controllers/ # Servlets (controllers)
-│ │ │ ├── shared/database/ # ConnectionFactory & DatabaseMigrator
-│ │ │ ├── shared/models/ # POJOs (CatalogModel)
-│ │ │ ├── shared/repositories/ # JDBC Repositories
-│ │ └── resources/
-│ │ ├── db.properties # Database connection config
-│ │ ├── db/migrations/ # SQL migrations
-│ │ └── db/seeds/ # SQL seed data
-│ └── webapp/
-│ └── WEB-INF/views/items/ # JSP views
-│ └── list.jsp
+│   ├── main/
+│   │   ├── java/br/com/catalogo_livros_filmes/
+│   │   │   ├── api/controllers/       # Servlets (controllers)
+│   │   │   ├── shared/database/       # ConnectionFactory & DatabaseMigrator
+│   │   │   ├── shared/models/         # POJOs (CatalogModel)
+│   │   │   ├── shared/repositories/   # JDBC Repositories
+│   │   └── resources/
+│   │       ├── db.properties          # Database connection config
+│   │       ├── db/migrations/         # SQL migrations
+│   │       └── db/seeds/              # SQL seed data
+│   └── webapp/
+│       └── WEB-INF/views/items/       # JSP views
+│           └── list.jsp
 ├── pom.xml
 ├── Dockerfile
 └── docker-compose.yml
-
-yaml
-Copiar código
+```
 
 ---
 
 ## 🗄️ Database Configuration
+The application reads its configuration from src/main/resources/db.properties:
 
-The application reads its configuration from `src/main/resources/db.properties`:
-
-```properties
+```bash
+properties
+Copiar código
 db.url=jdbc:mysql://localhost:3306/catalog_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
 db.username=root
 db.password=secret
 db.driver=com.mysql.cj.jdbc.Driver
+```
 You can override these using environment variables (especially in Docker):
 
-Variable	Description
-DB_URL	JDBC connection string
-DB_USERNAME	Database username
-DB_PASSWORD	Database password
+| Variable | Description |
+|-----------|-------------|
+| `DB_URL` | JDBC connection string |
+| `DB_USERNAME` | Database username |
+| `DB_PASSWORD` | Database password |
 
-💡 Tip: Environment variables take precedence over the file values.
+> 💡 **Tip:** Environment variables take precedence over file values.
 
-🧱 Database Initialization (Migrations + Seeds)
-Before running the web app, initialize your database schema and seed data:
+--- 
+
+## 🧱 Database Initialization (Migrations + Seeds)
+Before running the web app, initialize your database schema and seed data.
 
 ▶ Option A – Run from IntelliJ
 Open br.com.catalogo_livros_filmes.shared.database.DatabaseMigrator
@@ -90,67 +103,83 @@ Open br.com.catalogo_livros_filmes.shared.database.DatabaseMigrator
 Right-click → Run 'DatabaseMigrator.main()'
 
 ▶ Option B – Run from command line
-bash
+```bash
 Copiar código
 mvn clean compile
 java -cp target/classes br.com.catalogo_livros_filmes.shared.database.DatabaseMigrator
-This process executes:
+```
+This will execute:
 
-db/migrations/V1__create_catalog_table.sql
+- db/migrations/V1__create_catalog_table.sql
+- db/seeds/S1__seed_catalog.sql
 
-db/seeds/S1__seed_catalog.sql
+---
 
-🐳 Running with Docker
+## 🐳 Running with Docker
 You can run the full environment (MySQL + WebApp) using Docker Compose.
 
-1️⃣ Build and start containers:
-bash
+## 1️⃣ Build and start containers
+```bash
 Copiar código
 docker compose up -d --build
-2️⃣ Access the app:
-🌐 http://localhost:8081/catalog
+```
 
-3️⃣ MySQL info:
-Key	Value
-Host	catalog-mysql
-Port	3306
-Database	catalog_db
-User	catalog_user
-Password	secret
+## 2️⃣ Access the app
+🌐 http://localhost:8081/home
 
-The app container (catalog-web) connects automatically using these variables.
+## 3️⃣ MySQL info
 
-🔧 Building Manually
+| Key | Value |
+|-----|--------|
+| **Host** | `catalog-mysql` |
+| **Port** | `3306` |
+| **Database** | `catalog_db` |
+| **User** | `catalog_user` |
+| **Password** | `secret` |
+
+---
+
+## 🔧 Building Manually
 If you just want to build the WAR (without Docker):
 
-bash
+```bash
 Copiar código
 mvn clean package
+```
 This generates:
 
-bash
+```bash
 Copiar código
 target/catalogo-livros-filmes.war
-You can then deploy it manually to a Tomcat 10+ server.
+```
+Then you can deploy it manually to a Tomcat 10+ server.
 
-💾 Data Persistence
+--- 
+
+## 💾 Data Persistence
 MySQL data is persisted in a Docker volume (mysql_data), defined in docker-compose.yml.
 You can safely restart containers without losing data.
 
-If needed to reset:
+To reset everything:
 
-bash
+```bash
 Copiar código
 docker compose down -v
-🧩 JSTL & JSP
+```
+
+--- 
+
+## 🧩 JSTL & JSP
 The project uses Jakarta JSTL 3.0 with Jakarta namespaces:
 
+```bash
 jsp
 Copiar código
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%@ taglib uri="jakarta.tags.functions" prefix="fn" %>
-Ensure the dependencies below are present in your pom.xml:
-
+```
+Make sure the dependencies below are present in your pom.xml:
+```bash
 xml
 Copiar código
 <dependency>
@@ -163,13 +192,19 @@ Copiar código
     <artifactId>jakarta.servlet.jsp.jstl</artifactId>
     <version>3.0.1</version>
 </dependency>
-🧠 Useful Commands
-Action	Command
-Build app	mvn clean package
-Start environment	docker compose up -d --build
-Stop environment	docker compose down
-Open MySQL shell	docker exec -it catalog-mysql mysql -u catalog_user -psecret
-View Tomcat logs	docker logs -f catalog-web
+```
+
+## 🧠 Useful Commands
+| Action | Command |
+|--------|----------|
+| **Build app** | `mvn clean package` |
+| **Start environment** | `docker compose up -d --build` |
+| **Stop environment** | `docker compose down` |
+| **Open MySQL shell** | `docker exec -it catalog-mysql mysql -u catalog_user -psecret` |
+| **View Tomcat logs** | `docker logs -f catalog-web` |
+
+--- 
 
 🧑‍💻 Author: Rodrigo Moura Ferreira
 📦 Project: catalogo-livros-filmes
+📚 GitHub: @rodrigomouraf
