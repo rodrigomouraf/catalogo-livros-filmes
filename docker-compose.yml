@@ -1,0 +1,28 @@
+services:
+  mysql:
+    image: mysql:8.4.0
+    container_name: catalog-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: catalog_db
+      MYSQL_USER: catalog_user
+      MYSQL_PASSWORD: secret
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  web:
+    build: .
+    container_name: catalog-web
+    ports:
+      - "8081:8080"
+    environment:
+      DB_URL: jdbc:mysql://catalog-mysql:3306/catalog_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      DB_USERNAME: catalog_user
+      DB_PASSWORD: secret
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
