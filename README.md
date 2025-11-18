@@ -12,13 +12,6 @@
   <img src="https://img.shields.io/badge/Maven-Build%20Tool-yellow?style=for-the-badge&logo=apachemaven">
 </p>
 
-<h1 align="center">📚 Catálogo de Livros, Séries e Filmes</h1>
-
-<p align="center">
-  <b>Aplicação web simples em Java (Servlets + JSP + JDBC)</b><br>
-  <i>Parte de um projeto acadêmico, com foco em arquitetura Java EE moderna</i>
-</p>
-
 ---
 
 ## 🎯 Learning Objectives
