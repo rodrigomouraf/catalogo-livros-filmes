@@ -1,9 +1,16 @@
-# 📚 Catalog of Books, Series and Movies
+<h1 align="center">📚 Catalogo de Livros, Séries e Filmes</h1>
 
-A simple Java web application for cataloging books, series, and movies — built with **Servlets**, **JSP**, and **JDBC**.  
-Originally created for academic purposes, but structured to resemble a real-world Java EE (Jakarta EE) web app.
+<p align="center">
+  <b>Aplicação web simples em Java (Servlets + JSP + JDBC)</b><br>
+  <i>Parte de um projeto acadêmico, com foco em arquitetura Java EE moderna</i>
+</p>
 
----
+<p align="center">
+  <img src="https://img.shields.io/badge/Java-21-orange?style=for-the-badge&logo=openjdk">
+  <img src="https://img.shields.io/badge/Tomcat-10-blue?style=for-the-badge&logo=apachetomcat">
+  <img src="https://img.shields.io/badge/MySQL-8-blue?style=for-the-badge&logo=mysql">
+  <img src="https://img.shields.io/badge/Maven-Build%20Tool-yellow?style=for-the-badge&logo=apachemaven">
+</p>
 
 ## 🎯 Learning Objectives
 
